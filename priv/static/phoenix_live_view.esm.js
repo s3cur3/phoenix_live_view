@@ -3509,9 +3509,10 @@ var View = class _View {
       return this.liveSocket.owner(phxTarget, (view) => callback(view, phxTarget));
     }
     if (isCid(phxTarget)) {
-      let targets = dom_default.findComponentNodeList(viewEl || this.el, phxTarget);
+      const el = viewEl || this.el;
+      let targets = dom_default.findComponentNodeList(el, phxTarget);
       if (targets.length === 0) {
-        logError(`no component found matching phx-target of ${phxTarget}`);
+        logError(`no component found matching phx-target of ${phxTarget} within element`, el);
       } else {
         callback(this, parseInt(phxTarget));
       }
